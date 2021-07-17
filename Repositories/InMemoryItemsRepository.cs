@@ -13,12 +13,28 @@ namespace Catalog.Repositories{
         };
 
         public IEnumerable<Item> GetItems(){
-            return items;
+            return items; 
         }
 
         public Item GetItem(Guid id){
             return items.FirstOrDefault(item => item.Id.Equals(id));
         }
 
+        public void CreateItem(Item item)
+        {
+            items.Add(item);
+        }
+
+        public void UpdateItem(Item item)
+        {
+            var index = items.FindIndex(i => i.Id.Equals(item.Id));
+            items[index] = item;
+        }
+
+        public void DeleteItem(Guid id)
+        {
+            var index = items.FindIndex(i => i.Id.Equals(id));
+            items.RemoveAt(index);
+        }
     }
 }
